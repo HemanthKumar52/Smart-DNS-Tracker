@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Smart DNS Tracker 🌐
 
-## Getting Started
+> **DNS Diagnostics Made Simple**
 
-First, run the development server:
+![Project Status](https://img.shields.io/badge/status-active-success.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Stop guessing why your emails land in spam. **Smart DNS Tracker** helps you diagnose DNS issues, verify global propagation, and improve email deliverability with AI-powered explanations.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Global Checks**: Verify DNS propagation worldwide to ensure your site is accessible everywhere.
+- **Security Analysis**: Identify vulnerabilities in your DNS records before attackers do.
+- **Deliverability Score**: Ensure your emails reach the inbox, not the spam folder.
+- **AI-Powered Insights**: Get actionable, easy-to-understand advice on how to fix complex DNS issues.
+- **Modern UI**: Built with a sleek, responsive design using the latest web technologies.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠 Tech Stack
 
-## Learn More
+- **Framework**: [Next.js 14](https://nextjs.org) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com)
+- **Icons**: [Lucide React](https://lucide.dev)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
 
-To learn more about Next.js, take a look at the following resources:
+## 🏁 Getting Started
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Follow these steps to get the project up and running locally.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Prerequisites
 
-## Deploy on Vercel
+- Node.js (v18 or later)
+- npm, yarn, pnpm, or bun
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Installation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/HemanthKumar52/Smart-DNS-Tracker.git
+    cd Smart-DNS-Tracker
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    npm install
+    # or
+    yarn install
+    # or
+    pnpm install
+    ```
+
+3.  **Run the development server**
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    # or
+    pnpm dev
+    ```
+
+4.  **Open the app**
+    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 🤝 Contributing
+
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1.  **Fork the Project**
+2.  **Create your Feature Branch**
+    ```bash
+    git checkout -b feature/AmazingFeature
+    ```
+3.  **Commit your Changes**
+    ```bash
+    git commit -m 'Add some AmazingFeature'
+    ```
+4.  **Push to the Branch**
+    ```bash
+    git push origin feature/AmazingFeature
+    ```
+5.  **Open a Pull Request**
+
+---
+
+Project Link: [https://github.com/HemanthKumar52/Smart-DNS-Tracker](https://github.com/HemanthKumar52/Smart-DNS-Tracker)
