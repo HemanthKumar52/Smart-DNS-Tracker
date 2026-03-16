@@ -4,27 +4,57 @@
 
 ![Project Status](https://img.shields.io/badge/status-active-success.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
+[![Deployed on Vercel](https://img.shields.io/badge/deployed%20on-Vercel-black.svg)](https://smart-dns-tracker.vercel.app/)
 
 Stop guessing why your emails land in spam. **Smart DNS Tracker** helps you diagnose DNS issues, verify global propagation, and improve email deliverability with AI-powered explanations.
 
+## 🔗 Live Demo
+
+**[https://smart-dns-tracker.vercel.app/](https://smart-dns-tracker.vercel.app/)**
+
 ## 🚀 Features
 
-- **Global Checks**: Verify DNS propagation worldwide to ensure your site is accessible everywhere.
-- **Security Analysis**: Identify vulnerabilities in your DNS records before attackers do.
-- **Deliverability Score**: Ensure your emails reach the inbox, not the spam folder.
-- **AI-Powered Insights**: Get actionable, easy-to-understand advice on how to fix complex DNS issues.
-- **Modern UI**: Built with a sleek, responsive design using the latest web technologies.
+- **DNS Analyzer** — Enter any domain and get a full health score covering MX, SPF, DMARC, and A records with detailed explanations and one-click copy for record values.
+- **DNS Propagation Checker** — Check if your DNS records have propagated across 6 global resolvers (Google, Cloudflare, Quad9, OpenDNS, AdGuard, DNS.SB) with real-time response times.
+- **DNS Compare** — Side-by-side comparison of two domains' DNS configurations and health scores.
+- **Verified Templates** — One-click copy DNS configurations for Google Workspace, Microsoft 365, Vercel, Cloudflare, SendGrid, AWS SES, Resend, and Zoho Mail.
+- **Learn DNS** — Interactive accordion guide covering A, MX, SPF, DMARC, CNAME, and NS records with explanations and examples.
+- **Dark / Light Mode** — Full theme toggle with persistent preference saved to localStorage.
+- **Search History** — Recent domain lookups stored locally with scores and timestamps.
+- **Keyboard Shortcuts** — Press `/` or `Ctrl+K` to focus the search bar instantly.
 
 ## 🛠 Tech Stack
 
 - **Framework**: [Next.js 14](https://nextjs.org) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com)
 - **Icons**: [Lucide React](https://lucide.dev)
 - **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **DNS Resolution**: [Google DNS-over-HTTPS API](https://dns.google) & [Cloudflare DoH](https://cloudflare-dns.com)
+- **Deployment**: [Vercel](https://vercel.com)
+
+## 📁 Project Structure
+
+```
+├── app/
+│   ├── layout.tsx          # Root layout with theme support
+│   ├── page.tsx            # Main page composing all sections
+│   └── globals.css         # Tailwind config, CSS variables, glass utilities
+├── components/
+│   ├── Navbar.tsx           # Navigation bar with theme toggle
+│   ├── DNSAnalyzer.tsx      # Domain analyzer with health scoring
+│   ├── Features.tsx         # Feature cards section
+│   ├── TemplatesSection.tsx # DNS config templates
+│   ├── PropagationChecker.tsx # Multi-resolver propagation check
+│   ├── DNSCompare.tsx       # Side-by-side domain comparison
+│   ├── LearnDNS.tsx         # Interactive DNS education guide
+│   └── Footer.tsx           # Footer with navigation links
+├── lib/
+│   ├── dns.ts              # DNS analysis logic (Google DoH API)
+│   └── utils.ts            # Tailwind class merge utility
+```
 
 ## 🏁 Getting Started
-
-Follow these steps to get the project up and running locally.
 
 ### Prerequisites
 
@@ -42,23 +72,15 @@ Follow these steps to get the project up and running locally.
 2.  **Install dependencies**
     ```bash
     npm install
-    # or
-    yarn install
-    # or
-    pnpm install
     ```
 
 3.  **Run the development server**
     ```bash
     npm run dev
-    # or
-    yarn dev
-    # or
-    pnpm dev
     ```
 
 4.  **Open the app**
-    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 🤝 Contributing
 
