@@ -3,28 +3,31 @@ import DNSAnalyzer from "@/components/DNSAnalyzer";
 import Footer from "@/components/Footer";
 import FeaturesSection from "@/components/Features";
 import TemplatesSection from "@/components/TemplatesSection";
+import PropagationChecker from "@/components/PropagationChecker";
+import DNSCompare from "@/components/DNSCompare";
+import LearnDNS from "@/components/LearnDNS";
 
 export default function Home() {
   return (
     <main className="min-h-screen flex flex-col relative overflow-hidden">
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="flex-1 flex flex-col items-center justify-center pt-32 pb-20 px-4 sm:px-6 lg:px-8 space-y-12 max-w-7xl mx-auto w-full">
-        
+
         <div className="text-center space-y-6 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-wider backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
             v1.0 Public Beta
           </div>
-          
+
           <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-white leading-[1.1]">
             DNS Diagnostics <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
               Made Simple
             </span>
           </h1>
-          
+
           <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
             Stop guessing why your emails land in spam. Diagnose DNS issues, get AI-powered explanations, and fix them in seconds.
           </p>
@@ -52,14 +55,20 @@ export default function Home() {
         </div>
 
       </section>
-      
+
       <FeaturesSection />
-      
+
       <TemplatesSection />
+
+      <PropagationChecker />
+
+      <DNSCompare />
+
+      <LearnDNS />
 
       {/* Background Gradients */}
       <div className="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-blue-500/5 to-transparent pointer-events-none" />
-      
+
       <Footer />
     </main>
   );

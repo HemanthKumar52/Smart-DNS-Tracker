@@ -8,15 +8,18 @@ export default function Footer() {
           <h3 className="text-lg font-bold text-white">Smart DNS</h3>
           <p className="text-sm text-gray-500">AI-powered DNS diagnostics for modern teams.</p>
         </div>
-        
+
         <div className="flex gap-6 text-sm text-gray-400">
-            <Link href="#" className="hover:text-white transition-colors">Privacy</Link>
-            <Link href="#" className="hover:text-white transition-colors">Terms</Link>
-            <Link href="#" className="hover:text-white transition-colors">GitHub</Link>
+          <Link href="#features" className="hover:text-white transition-colors">Features</Link>
+          <Link href="#templates" className="hover:text-white transition-colors">Templates</Link>
+          <Link href="#propagation" className="hover:text-white transition-colors">Propagation</Link>
+          <Link href="#learn" className="hover:text-white transition-colors">Learn DNS</Link>
+          <Link href="#" className="hover:text-white transition-colors">Privacy</Link>
+          <Link href="#" className="hover:text-white transition-colors">GitHub</Link>
         </div>
-        
+
         <div className="text-sm text-gray-600">
-            © 2024 Smart DNS Inc.
+          © {new Date().getFullYear()} Smart DNS Inc.
         </div>
       </div>
     </footer>
