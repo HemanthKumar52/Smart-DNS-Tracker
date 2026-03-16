@@ -21,14 +21,14 @@ export default function Home() {
             v1.0 Public Beta
           </div>
 
-          <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-white leading-[1.1]">
+          <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-gray-900 dark:text-white leading-[1.1]">
             DNS Diagnostics <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400">
               Made Simple
             </span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
             Stop guessing why your emails land in spam. Diagnose DNS issues, get AI-powered explanations, and fix them in seconds.
           </p>
         </div>

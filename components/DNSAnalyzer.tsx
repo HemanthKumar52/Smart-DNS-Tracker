@@ -147,9 +147,9 @@ export default function DNSAnalyzer() {
     <div className="w-full">
       {/* Keyboard shortcut hint */}
       <div className="text-center mb-3">
-        <span className="text-xs text-gray-600">
-          Press <kbd className="px-1.5 py-0.5 rounded bg-white/10 border border-white/10 text-gray-400 font-mono text-[10px]">/</kbd> or{" "}
-          <kbd className="px-1.5 py-0.5 rounded bg-white/10 border border-white/10 text-gray-400 font-mono text-[10px]">Ctrl+K</kbd> to focus search
+        <span className="text-xs text-gray-500 dark:text-gray-600">
+          Press <kbd className="px-1.5 py-0.5 rounded bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/10 text-gray-500 dark:text-gray-400 font-mono text-[10px]">/</kbd> or{" "}
+          <kbd className="px-1.5 py-0.5 rounded bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/10 text-gray-500 dark:text-gray-400 font-mono text-[10px]">Ctrl+K</kbd> to focus search
         </span>
       </div>
 
@@ -158,7 +158,7 @@ export default function DNSAnalyzer() {
         <form onSubmit={handleAnalyze} className="relative max-w-2xl mx-auto">
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-500"></div>
-            <div className="relative flex items-center bg-gray-900 rounded-2xl border border-white/10 p-2 shadow-2xl">
+            <div className="relative flex items-center bg-white dark:bg-gray-900 rounded-2xl border border-black/10 dark:border-white/10 p-2 shadow-2xl">
               <Search className="w-6 h-6 text-gray-400 ml-3 mr-3" />
               <input
                 ref={inputRef}
@@ -168,7 +168,7 @@ export default function DNSAnalyzer() {
                 onFocus={() => history.length > 0 && setShowHistory(true)}
                 onBlur={() => setTimeout(() => setShowHistory(false), 200)}
                 placeholder="hostname.com"
-                className="w-full bg-transparent border-none outline-none text-lg text-white placeholder-gray-500 font-medium h-12"
+                className="w-full bg-transparent border-none outline-none text-lg text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 font-medium h-12"
               />
               <button
                 type="submit"
@@ -182,7 +182,7 @@ export default function DNSAnalyzer() {
 
           {/* Validation Error */}
           {validationError && (
-            <p className="text-red-400 text-xs mt-2 ml-4">{validationError}</p>
+            <p className="text-red-500 dark:text-red-400 text-xs mt-2 ml-4">{validationError}</p>
           )}
 
           {/* TLD Suggestions */}
@@ -193,7 +193,7 @@ export default function DNSAnalyzer() {
                   key={tld}
                   type="button"
                   onClick={() => { setDomain(domain + tld); setValidationError(""); }}
-                  className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
+                  className="text-xs px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
                 >
                   {domain}{tld}
                 </button>
@@ -210,7 +210,7 @@ export default function DNSAnalyzer() {
                 exit={{ opacity: 0, y: -5 }}
                 className="absolute top-full mt-2 w-full glass rounded-xl overflow-hidden"
               >
-                <div className="flex items-center justify-between px-4 py-2 border-b border-white/10">
+                <div className="flex items-center justify-between px-4 py-2 border-b border-black/10 dark:border-white/10">
                   <span className="text-xs text-gray-500 uppercase tracking-wider flex items-center gap-1">
                     <Clock className="w-3 h-3" /> Recent Searches
                   </span>
@@ -227,22 +227,22 @@ export default function DNSAnalyzer() {
                     key={i}
                     type="button"
                     onMouseDown={(e) => { e.preventDefault(); handleHistoryClick(h.domain); }}
-                    className="w-full px-4 py-3 flex items-center justify-between hover:bg-white/5 transition-colors text-left"
+                    className="w-full px-4 py-3 flex items-center justify-between hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-left"
                   >
                     <div className="flex items-center gap-3">
                       <Search className="w-3.5 h-3.5 text-gray-500" />
-                      <span className="text-sm text-white font-mono">{h.domain}</span>
+                      <span className="text-sm text-gray-900 dark:text-white font-mono">{h.domain}</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <span className={cn(
                         "text-xs font-semibold px-2 py-0.5 rounded-full",
-                        h.score >= 90 ? "bg-green-500/10 text-green-400" :
-                        h.score >= 50 ? "bg-yellow-500/10 text-yellow-400" :
-                        "bg-red-500/10 text-red-400"
+                        h.score >= 90 ? "bg-green-500/10 text-green-600 dark:text-green-400" :
+                        h.score >= 50 ? "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400" :
+                        "bg-red-500/10 text-red-600 dark:text-red-400"
                       )}>
                         {h.score}
                       </span>
-                      <span className="text-xs text-gray-600">
+                      <span className="text-xs text-gray-500 dark:text-gray-600">
                         {new Date(h.timestamp).toLocaleDateString()}
                       </span>
                     </div>
@@ -268,18 +268,18 @@ export default function DNSAnalyzer() {
             <div className="flex flex-col md:flex-row items-center justify-center gap-10">
               <HealthScore score={report.score} />
               <div className="text-center md:text-left space-y-2">
-                <h2 className="text-3xl font-bold text-white">Analysis Report</h2>
-                <p className="text-gray-400">
-                  Generated for <span className="font-mono text-blue-400">{report.domain}</span>
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Analysis Report</h2>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Generated for <span className="font-mono text-blue-600 dark:text-blue-400">{report.domain}</span>
                 </p>
                 <div className="flex gap-2 justify-center md:justify-start mt-2">
-                  <span className="px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-sm border border-green-500/20">
+                  <span className="px-3 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 text-sm border border-green-500/20">
                     {report.records.filter((r) => r.status === "valid").length} Valid
                   </span>
-                  <span className="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-sm border border-yellow-500/20">
+                  <span className="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 text-sm border border-yellow-500/20">
                     {report.records.filter((r) => r.status === "warning").length} Warnings
                   </span>
-                  <span className="px-3 py-1 rounded-full bg-red-500/10 text-red-400 text-sm border border-red-500/20">
+                  <span className="px-3 py-1 rounded-full bg-red-500/10 text-red-600 dark:text-red-400 text-sm border border-red-500/20">
                     {report.records.filter((r) => r.status === "error").length} Errors
                   </span>
                 </div>
@@ -287,12 +287,12 @@ export default function DNSAnalyzer() {
               <div className="md:ml-auto flex gap-2">
                 <button
                   onClick={copyReportToClipboard}
-                  className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-sm text-white transition-colors border border-white/5 backdrop-blur-sm"
+                  className="flex items-center gap-2 px-4 py-2 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 rounded-lg text-sm text-gray-700 dark:text-white transition-colors border border-black/5 dark:border-white/5 backdrop-blur-sm"
                 >
                   {copied ? <Check className="w-4 h-4 text-green-400" /> : <Clipboard className="w-4 h-4" />}
                   {copied ? "Copied!" : "Copy Report"}
                 </button>
-                <button className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-sm text-white transition-colors border border-white/5 backdrop-blur-sm">
+                <button className="flex items-center gap-2 px-4 py-2 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 rounded-lg text-sm text-gray-700 dark:text-white transition-colors border border-black/5 dark:border-white/5 backdrop-blur-sm">
                   <Share2 className="w-4 h-4" />
                   Share
                 </button>
@@ -300,13 +300,13 @@ export default function DNSAnalyzer() {
             </div>
 
             {/* Education Tip */}
-            <div className="bg-blue-900/20 border border-blue-500/20 rounded-xl p-4 flex gap-4 items-start">
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-500/20 rounded-xl p-4 flex gap-4 items-start">
               <div className="p-2 bg-blue-500/20 rounded-lg">
-                <Lightbulb className="w-5 h-5 text-blue-400" />
+                <Lightbulb className="w-5 h-5 text-blue-500 dark:text-blue-400" />
               </div>
               <div>
-                <h4 className="font-semibold text-blue-300 text-sm mb-1">Did you know?</h4>
-                <p className="text-sm text-gray-400">
+                <h4 className="font-semibold text-blue-700 dark:text-blue-300 text-sm mb-1">Did you know?</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
                   DNS propagation can take up to 48 hours, but modern DNS providers like Cloudflare often propagate changes in seconds.
                 </p>
               </div>
@@ -336,7 +336,7 @@ function HealthScore({ score }: { score: number }) {
   return (
     <div className="relative w-32 h-32 flex items-center justify-center" role="img" aria-label={`Health score: ${score} out of 100`}>
       <svg className="w-full h-full transform -rotate-90">
-        <circle className="text-gray-800" strokeWidth="8" stroke="currentColor" fill="transparent" r="40" cx="64" cy="64" />
+        <circle className="text-gray-200 dark:text-gray-800" strokeWidth="8" stroke="currentColor" fill="transparent" r="40" cx="64" cy="64" />
         <circle
           className={cn("transition-all duration-1000 ease-out", color)}
           strokeWidth="8"
@@ -393,10 +393,10 @@ function ResultCard({ record, delay }: { record: DNSResult; delay: number }) {
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-white/5 rounded-lg">{icons[record.status]}</div>
+          <div className="p-2 bg-black/5 dark:bg-white/5 rounded-lg">{icons[record.status]}</div>
           <div>
-            <h3 className="font-semibold text-white">{record.type} Record</h3>
-            <p className="text-sm text-gray-400">{record.message}</p>
+            <h3 className="font-semibold text-gray-900 dark:text-white">{record.type} Record</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400">{record.message}</p>
           </div>
         </div>
         <ChevronDown className={cn("text-gray-500 transition-transform", expanded && "rotate-180")} />
@@ -410,36 +410,36 @@ function ResultCard({ record, delay }: { record: DNSResult; delay: number }) {
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden"
           >
-            <div className="pt-3 border-t border-white/5 space-y-3" onClick={(e) => e.stopPropagation()}>
-              <p className="text-sm text-gray-300">{record.explanation}</p>
+            <div className="pt-3 border-t border-black/5 dark:border-white/5 space-y-3" onClick={(e) => e.stopPropagation()}>
+              <p className="text-sm text-gray-600 dark:text-gray-300">{record.explanation}</p>
 
               {record.records.length > 0 ? (
                 <div className="space-y-2">
                   {record.records.map((r, i) => (
                     <div
                       key={i}
-                      className="bg-black/30 p-2 rounded border border-white/5 font-mono text-xs text-blue-300 break-all flex justify-between items-center group/code"
+                      className="bg-gray-100 dark:bg-black/30 p-2 rounded border border-gray-200 dark:border-white/5 font-mono text-xs text-blue-600 dark:text-blue-300 break-all flex justify-between items-center group/code"
                     >
                       <span className="mr-2">{r}</span>
                       <button
                         onClick={() => handleCopyRecord(r, i)}
-                        className="shrink-0 p-1 rounded hover:bg-white/10 transition-colors"
+                        className="shrink-0 p-1 rounded hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
                       >
                         {copiedIdx === i ? (
                           <Check className="w-3 h-3 text-green-400" />
                         ) : (
-                          <Copy className="w-3 h-3 text-gray-600 group-hover/code:text-white" />
+                          <Copy className="w-3 h-3 text-gray-400 dark:text-gray-600 group-hover/code:text-gray-900 dark:group-hover/code:text-white" />
                         )}
                       </button>
                     </div>
                   ))}
                 </div>
               ) : (
-                <div className="bg-red-500/10 p-2 rounded text-xs text-red-300">No records found.</div>
+                <div className="bg-red-500/10 p-2 rounded text-xs text-red-600 dark:text-red-300">No records found.</div>
               )}
 
               {record.status === "error" && (
-                <button className="w-full py-2 bg-blue-500/10 text-blue-400 text-sm font-medium rounded hover:bg-blue-500/20 transition-colors">
+                <button className="w-full py-2 bg-blue-500/10 text-blue-600 dark:text-blue-400 text-sm font-medium rounded hover:bg-blue-500/20 transition-colors">
                   Get Suggested Fix
                 </button>
               )}

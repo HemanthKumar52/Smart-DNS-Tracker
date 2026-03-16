@@ -86,30 +86,30 @@ export default function PropagationChecker() {
     <section id="propagation" className="py-24">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">DNS Propagation Checker</h2>
-          <p className="text-gray-400">Check if your DNS records have propagated across global resolvers.</p>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">DNS Propagation Checker</h2>
+          <p className="text-gray-600 dark:text-gray-400">Check if your DNS records have propagated across global resolvers.</p>
         </div>
 
         <form onSubmit={handleCheck} className="max-w-2xl mx-auto mb-12">
           <div className="flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
-              <Globe className="w-5 h-5 text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Globe className="w-5 h-5 text-gray-400 dark:text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={domain}
                 onChange={(e) => setDomain(e.target.value.replace(/^https?:\/\//, "").replace(/\/.*$/, ""))}
                 placeholder="example.com"
-                className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 outline-none focus:border-blue-500/50 transition-colors backdrop-blur-sm"
+                className="w-full pl-10 pr-4 py-3 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 outline-none focus:border-blue-500/50 transition-colors backdrop-blur-sm"
               />
             </div>
             <div className="flex gap-2">
               <select
                 value={recordType}
                 onChange={(e) => setRecordType(e.target.value)}
-                className="px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-blue-500/50 transition-colors backdrop-blur-sm cursor-pointer"
+                className="px-4 py-3 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl text-gray-900 dark:text-white outline-none focus:border-blue-500/50 transition-colors backdrop-blur-sm cursor-pointer"
               >
                 {recordTypes.map((t) => (
-                  <option key={t} value={t} className="bg-gray-900">{t}</option>
+                  <option key={t} value={t} className="bg-white dark:bg-gray-900">{t}</option>
                 ))}
               </select>
               <button
@@ -130,11 +130,11 @@ export default function PropagationChecker() {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               {totalChecked > 0 && (
                 <div className="max-w-2xl mx-auto mb-8">
-                  <div className="flex justify-between text-sm text-gray-400 mb-2">
+                  <div className="flex justify-between text-sm text-gray-500 dark:text-gray-400 mb-2">
                     <span>Propagation Status</span>
                     <span>{successCount}/{resolvers.length} resolvers responding</span>
                   </div>
-                  <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+                  <div className="w-full h-2 bg-gray-200 dark:bg-white/5 rounded-full overflow-hidden">
                     <motion.div
                       className={cn(
                         "h-full rounded-full transition-all",
@@ -160,14 +160,14 @@ export default function PropagationChecker() {
                       "glass-card p-4 rounded-xl border",
                       result.status === "success" ? "border-green-500/20" :
                       result.status === "error" ? "border-red-500/20" :
-                      "border-white/5"
+                      "border-gray-200 dark:border-white/5"
                     )}
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
                         <span className="text-lg">{result.resolver.flag}</span>
                         <div>
-                          <h4 className="font-semibold text-white text-sm">{result.resolver.name}</h4>
+                          <h4 className="font-semibold text-gray-900 dark:text-white text-sm">{result.resolver.name}</h4>
                           <p className="text-xs text-gray-500">{result.resolver.region}</p>
                         </div>
                       </div>
@@ -184,17 +184,17 @@ export default function PropagationChecker() {
                       <div className="space-y-1">
                         {result.records.length > 0 ? (
                           result.records.slice(0, 3).map((r, j) => (
-                            <div key={j} className="font-mono text-xs text-blue-300 bg-black/30 px-2 py-1 rounded break-all">
+                            <div key={j} className="font-mono text-xs text-blue-600 dark:text-blue-300 bg-gray-100 dark:bg-black/30 px-2 py-1 rounded break-all">
                               {r}
                             </div>
                           ))
                         ) : (
-                          <p className="text-xs text-red-400">No records found</p>
+                          <p className="text-xs text-red-500 dark:text-red-400">No records found</p>
                         )}
                         {result.records.length > 3 && (
                           <p className="text-xs text-gray-500">+{result.records.length - 3} more</p>
                         )}
-                        <p className="text-xs text-gray-600 mt-1">{result.responseTime}ms</p>
+                        <p className="text-xs text-gray-400 dark:text-gray-600 mt-1">{result.responseTime}ms</p>
                       </div>
                     )}
                   </motion.div>

@@ -4,6 +4,38 @@
 
 @layer base {
   :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 97%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 224 76% 48%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
     --background: 222 47% 11%;
     --foreground: 210 40% 98%;
 
@@ -31,8 +63,6 @@
     --border: 217 19% 27%;
     --input: 217 19% 27%;
     --ring: 224 76% 48%;
-
-    --radius: 0.75rem;
   }
 }
 
@@ -48,16 +78,16 @@
 
 /* Glassmorphism Utilities */
 .glass {
-  @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-xl;
+  @apply bg-black/5 dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 shadow-xl;
 }
 
 .glass-card {
-  @apply bg-card/40 backdrop-blur-lg border border-white/5 shadow-lg hover:border-white/10 transition-colors duration-300;
+  @apply bg-white/60 dark:bg-card/40 backdrop-blur-lg border border-black/5 dark:border-white/5 shadow-lg hover:border-black/10 dark:hover:border-white/10 transition-colors duration-300;
 }
 
 /* Custom Gradients */
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-500 dark:from-blue-400 to-purple-500 dark:to-purple-400;
 }
 
 .bg-gradient-main {

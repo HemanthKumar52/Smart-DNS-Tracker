@@ -21,7 +21,7 @@ const topics: DNSTopic[] = [
     icon: <Globe className="w-5 h-5" />,
     title: "A Record",
     tagline: "Points your domain to an IP address",
-    color: "text-blue-400 bg-blue-500/10 border-blue-500/20",
+    color: "text-blue-500 dark:text-blue-400 bg-blue-500/10 border-blue-500/20",
     sections: [
       {
         heading: "What is it?",
@@ -43,7 +43,7 @@ const topics: DNSTopic[] = [
     icon: <Mail className="w-5 h-5" />,
     title: "MX Record",
     tagline: "Routes email to your mail server",
-    color: "text-purple-400 bg-purple-500/10 border-purple-500/20",
+    color: "text-purple-500 dark:text-purple-400 bg-purple-500/10 border-purple-500/20",
     sections: [
       {
         heading: "What is it?",
@@ -65,7 +65,7 @@ const topics: DNSTopic[] = [
     icon: <Shield className="w-5 h-5" />,
     title: "SPF Record",
     tagline: "Prevents email spoofing",
-    color: "text-green-400 bg-green-500/10 border-green-500/20",
+    color: "text-green-500 dark:text-green-400 bg-green-500/10 border-green-500/20",
     sections: [
       {
         heading: "What is it?",
@@ -87,7 +87,7 @@ const topics: DNSTopic[] = [
     icon: <Lock className="w-5 h-5" />,
     title: "DMARC Record",
     tagline: "Policy for handling failed authentication",
-    color: "text-yellow-400 bg-yellow-500/10 border-yellow-500/20",
+    color: "text-yellow-500 dark:text-yellow-400 bg-yellow-500/10 border-yellow-500/20",
     sections: [
       {
         heading: "What is it?",
@@ -109,7 +109,7 @@ const topics: DNSTopic[] = [
     icon: <Server className="w-5 h-5" />,
     title: "CNAME Record",
     tagline: "Creates an alias to another domain",
-    color: "text-cyan-400 bg-cyan-500/10 border-cyan-500/20",
+    color: "text-cyan-500 dark:text-cyan-400 bg-cyan-500/10 border-cyan-500/20",
     sections: [
       {
         heading: "What is it?",
@@ -131,7 +131,7 @@ const topics: DNSTopic[] = [
     icon: <Globe className="w-5 h-5" />,
     title: "NS Record",
     tagline: "Delegates DNS authority",
-    color: "text-orange-400 bg-orange-500/10 border-orange-500/20",
+    color: "text-orange-500 dark:text-orange-400 bg-orange-500/10 border-orange-500/20",
     sections: [
       {
         heading: "What is it?",
@@ -157,12 +157,12 @@ export default function LearnDNS() {
     <section id="learn" className="py-24">
       <div className="max-w-4xl mx-auto px-6">
         <div className="mb-12 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400 text-xs font-semibold uppercase tracking-wider mb-4">
             <BookOpen className="w-3.5 h-3.5" />
             Interactive Guide
           </div>
-          <h2 className="text-3xl font-bold text-white mb-4">Learn DNS Records</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Learn DNS Records</h2>
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Understanding DNS doesn't require a CS degree. Click any record type below to learn what it does, why it matters, and how to configure it correctly.
           </p>
         </div>
@@ -179,7 +179,7 @@ export default function LearnDNS() {
               <div
                 className={cn(
                   "glass-card rounded-xl border cursor-pointer transition-all",
-                  expandedId === topic.id ? "border-white/10" : "border-white/5 hover:border-white/10"
+                  expandedId === topic.id ? "border-gray-300 dark:border-white/10" : "border-gray-200 dark:border-white/5 hover:border-gray-300 dark:hover:border-white/10"
                 )}
               >
                 <button
@@ -190,12 +190,12 @@ export default function LearnDNS() {
                     {topic.icon}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-white">{topic.title}</h3>
-                    <p className="text-sm text-gray-400">{topic.tagline}</p>
+                    <h3 className="font-semibold text-gray-900 dark:text-white">{topic.title}</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{topic.tagline}</p>
                   </div>
                   <ChevronDown
                     className={cn(
-                      "w-5 h-5 text-gray-500 transition-transform shrink-0",
+                      "w-5 h-5 text-gray-400 dark:text-gray-500 transition-transform shrink-0",
                       expandedId === topic.id && "rotate-180"
                     )}
                   />
@@ -210,18 +210,18 @@ export default function LearnDNS() {
                       transition={{ duration: 0.2 }}
                       className="overflow-hidden"
                     >
-                      <div className="px-5 pb-5 space-y-4 border-t border-white/5 pt-4">
+                      <div className="px-5 pb-5 space-y-4 border-t border-gray-200 dark:border-white/5 pt-4">
                         {topic.sections.map((section, j) => (
                           <div key={j}>
-                            <h4 className="text-sm font-semibold text-gray-300 mb-1">{section.heading}</h4>
-                            <p className="text-sm text-gray-400 leading-relaxed">{section.content}</p>
+                            <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">{section.heading}</h4>
+                            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{section.content}</p>
                           </div>
                         ))}
 
                         {topic.example && (
                           <div className="mt-3">
-                            <h4 className="text-sm font-semibold text-gray-300 mb-2">Example</h4>
-                            <div className="bg-black/40 rounded-lg p-3 border border-white/5 font-mono text-xs text-blue-300 break-all">
+                            <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Example</h4>
+                            <div className="bg-gray-100 dark:bg-black/40 rounded-lg p-3 border border-gray-200 dark:border-white/5 font-mono text-xs text-blue-600 dark:text-blue-300 break-all">
                               {topic.example}
                             </div>
                           </div>

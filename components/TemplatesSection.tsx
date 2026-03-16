@@ -111,21 +111,21 @@ export default function TemplatesSection() {
   );
 
   return (
-    <section id="templates" className="py-24 bg-black/20">
+    <section id="templates" className="py-24 bg-gray-50/50 dark:bg-black/20">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Verified Templates</h2>
-          <p className="text-gray-400 mb-6">One-click copy configurations for your favorite tools.</p>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Verified Templates</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">One-click copy configurations for your favorite tools.</p>
 
           {/* Search/filter */}
           <div className="max-w-sm mx-auto relative">
-            <Search className="w-4 h-4 text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-gray-400 dark:text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
               placeholder="Filter templates..."
-              className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 outline-none focus:border-blue-500/50 transition-colors backdrop-blur-sm"
+              className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 outline-none focus:border-blue-500/50 transition-colors backdrop-blur-sm"
             />
           </div>
         </div>
@@ -162,7 +162,7 @@ function TemplateCard({ template }: { template: Template }) {
   };
 
   return (
-    <div className="glass-card rounded-xl p-6 border border-white/5 space-y-4 h-full flex flex-col">
+    <div className="glass-card rounded-xl p-6 border border-black/5 dark:border-white/5 space-y-4 h-full flex flex-col">
       <div className="flex items-center gap-3 mb-2">
         <div
           className={cn(
@@ -172,27 +172,27 @@ function TemplateCard({ template }: { template: Template }) {
         >
           {template.logo}
         </div>
-        <h3 className="font-semibold text-white">{template.name}</h3>
+        <h3 className="font-semibold text-gray-900 dark:text-white">{template.name}</h3>
       </div>
 
       <div className="space-y-3 flex-1">
         {template.records.map((record, i) => (
           <div
             key={i}
-            className="group relative bg-black/40 rounded-lg p-3 border border-white/5 hover:border-white/10 transition-colors"
+            className="group relative bg-gray-100 dark:bg-black/40 rounded-lg p-3 border border-gray-200 dark:border-white/5 hover:border-gray-300 dark:hover:border-white/10 transition-colors"
           >
             <div className="flex justify-between items-start mb-1 text-xs text-gray-500 uppercase font-mono">
               <span>{record.type}</span>
               <span>{record.name}</span>
             </div>
-            <div className="font-mono text-xs text-blue-300 break-all pr-8">{record.value}</div>
+            <div className="font-mono text-xs text-blue-600 dark:text-blue-300 break-all pr-8">{record.value}</div>
 
             <button
               onClick={() => handleCopy(record.value, i)}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded hover:bg-black/5 dark:hover:bg-white/10 text-gray-400 hover:text-gray-700 dark:hover:text-white transition-colors"
             >
               {copiedIndex === i ? (
-                <Check className="w-3.5 h-3.5 text-green-400" />
+                <Check className="w-3.5 h-3.5 text-green-500" />
               ) : (
                 <Copy className="w-3.5 h-3.5" />
               )}
@@ -201,7 +201,7 @@ function TemplateCard({ template }: { template: Template }) {
         ))}
       </div>
 
-      <button className="w-full mt-2 py-2 text-xs font-medium text-center text-gray-500 hover:text-white transition-colors border-t border-white/5 pt-4">
+      <button className="w-full mt-2 py-2 text-xs font-medium text-center text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors border-t border-gray-200 dark:border-white/5 pt-4">
         View Full Documentation →
       </button>
     </div>

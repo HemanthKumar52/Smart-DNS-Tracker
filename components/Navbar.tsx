@@ -40,14 +40,14 @@ export default function Navbar() {
           <div className="p-1.5 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg">
             <Zap className="w-5 h-5 text-white fill-white" />
           </div>
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-white">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400 dark:from-blue-400 dark:to-white">
             Smart DNS
           </span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-300">
+        <div className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600 dark:text-gray-300">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-white transition-colors">
+            <Link key={link.href} href={link.href} className="hover:text-gray-900 dark:hover:text-white transition-colors">
               {link.label}
             </Link>
           ))}
@@ -56,20 +56,20 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all"
+            className="p-2 rounded-full bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 text-gray-700 dark:text-white transition-all"
             aria-label="Toggle theme"
           >
             {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
 
-          <button className="hidden sm:block bg-white/10 hover:bg-white/20 text-white px-5 py-2 rounded-full text-sm font-medium transition-all border border-white/5 backdrop-blur-md">
+          <button className="hidden sm:block bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 text-gray-700 dark:text-white px-5 py-2 rounded-full text-sm font-medium transition-all border border-black/5 dark:border-white/5 backdrop-blur-md">
             Get Started
           </button>
 
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all"
+            className="md:hidden p-2 rounded-full bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 text-gray-700 dark:text-white transition-all"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -92,7 +92,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-colors font-medium"
+                className="block px-4 py-3 rounded-xl text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors font-medium"
               >
                 {link.label}
               </Link>
