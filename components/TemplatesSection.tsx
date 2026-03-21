@@ -10,6 +10,7 @@ type Template = {
   name: string;
   logo: string;
   color: string;
+  docUrl: string;
   records: { type: string; name: string; value: string; priority?: number }[];
 };
 
@@ -19,6 +20,7 @@ const templates: Template[] = [
     name: "Google Workspace",
     color: "from-blue-500 to-red-500",
     logo: "G",
+    docUrl: "https://support.google.com/a/answer/140034",
     records: [
       { type: "MX", name: "@", value: "SMTP.GOOGLE.COM.", priority: 1 },
       { type: "TXT", name: "@", value: "v=spf1 include:_spf.google.com ~all" },
@@ -29,6 +31,7 @@ const templates: Template[] = [
     name: "Microsoft 365",
     color: "from-blue-600 to-cyan-500",
     logo: "M",
+    docUrl: "https://learn.microsoft.com/en-us/microsoft-365/admin/get-help-with-domains/create-dns-records-at-any-dns-hosting-provider",
     records: [
       { type: "MX", name: "@", value: "*.mail.protection.outlook.com", priority: 0 },
       { type: "TXT", name: "@", value: "v=spf1 include:spf.protection.outlook.com -all" },
@@ -40,6 +43,7 @@ const templates: Template[] = [
     name: "Resend",
     color: "from-black to-gray-800",
     logo: "R",
+    docUrl: "https://resend.com/docs/dashboard/domains/introduction",
     records: [
       { type: "MX", name: "bounces", value: "feedback-smtp.us-east-1.amazonses.com", priority: 10 },
       { type: "TXT", name: "bounces", value: "v=spf1 include:amazonses.com ~all" },
@@ -51,6 +55,7 @@ const templates: Template[] = [
     name: "SendGrid",
     color: "from-blue-500 to-blue-700",
     logo: "SG",
+    docUrl: "https://docs.sendgrid.com/ui/account-and-settings/how-to-set-up-domain-authentication",
     records: [
       { type: "CNAME", name: "em1234", value: "u1234567.wl123.sendgrid.net" },
       { type: "CNAME", name: "s1._domainkey", value: "s1.domainkey.u1234567.wl123.sendgrid.net" },
@@ -63,6 +68,7 @@ const templates: Template[] = [
     name: "Vercel",
     color: "from-gray-900 to-gray-600",
     logo: "V",
+    docUrl: "https://vercel.com/docs/projects/domains",
     records: [
       { type: "A", name: "@", value: "76.76.21.21" },
       { type: "CNAME", name: "www", value: "cname.vercel-dns.com" },
@@ -73,6 +79,7 @@ const templates: Template[] = [
     name: "Cloudflare",
     color: "from-orange-500 to-yellow-500",
     logo: "CF",
+    docUrl: "https://developers.cloudflare.com/dns/manage-dns-records/how-to/create-dns-records/",
     records: [
       { type: "NS", name: "@", value: "*.ns.cloudflare.com" },
       { type: "A", name: "@", value: "Proxied via Cloudflare" },
@@ -84,6 +91,7 @@ const templates: Template[] = [
     name: "AWS SES",
     color: "from-orange-500 to-yellow-600",
     logo: "AWS",
+    docUrl: "https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html",
     records: [
       { type: "MX", name: "mail", value: "inbound-smtp.us-east-1.amazonaws.com", priority: 10 },
       { type: "TXT", name: "@", value: "v=spf1 include:amazonses.com ~all" },
@@ -95,6 +103,7 @@ const templates: Template[] = [
     name: "Zoho Mail",
     color: "from-red-500 to-red-700",
     logo: "Z",
+    docUrl: "https://www.zoho.com/mail/help/adminconsole/configure-email-delivery.html",
     records: [
       { type: "MX", name: "@", value: "mx.zoho.com", priority: 10 },
       { type: "MX", name: "@", value: "mx2.zoho.com", priority: 20 },
@@ -201,9 +210,14 @@ function TemplateCard({ template }: { template: Template }) {
         ))}
       </div>
 
-      <button className="w-full mt-2 py-2 text-xs font-medium text-center text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors border-t border-gray-200 dark:border-white/5 pt-4">
+      <a
+        href={template.docUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-full mt-2 py-2 text-xs font-medium text-center text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors border-t border-gray-200 dark:border-white/5 pt-4 block"
+      >
         View Full Documentation →
-      </button>
+      </a>
     </div>
   );
 }

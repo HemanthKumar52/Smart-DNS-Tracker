@@ -34,7 +34,7 @@ export default function Home() {
         </div>
 
         {/* Analyzer Component */}
-        <div className="w-full max-w-4xl mx-auto">
+        <div id="analyzer" className="w-full max-w-4xl mx-auto scroll-mt-32">
           <DNSAnalyzer />
         </div>
 

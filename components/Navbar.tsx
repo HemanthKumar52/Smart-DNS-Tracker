@@ -62,9 +62,9 @@ export default function Navbar() {
             {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
 
-          <button className="hidden sm:block bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 text-gray-700 dark:text-white px-5 py-2 rounded-full text-sm font-medium transition-all border border-black/5 dark:border-white/5 backdrop-blur-md">
+          <Link href="#analyzer" className="hidden sm:block bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 text-gray-700 dark:text-white px-5 py-2 rounded-full text-sm font-medium transition-all border border-black/5 dark:border-white/5 backdrop-blur-md">
             Get Started
-          </button>
+          </Link>
 
           {/* Mobile hamburger */}
           <button
@@ -97,9 +97,9 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <button className="w-full mt-2 bg-blue-600 hover:bg-blue-500 text-white px-5 py-3 rounded-xl text-sm font-medium transition-all">
+            <Link href="#analyzer" onClick={() => setMobileOpen(false)} className="block w-full mt-2 bg-blue-600 hover:bg-blue-500 text-white px-5 py-3 rounded-xl text-sm font-medium transition-all text-center">
               Get Started
-            </button>
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>

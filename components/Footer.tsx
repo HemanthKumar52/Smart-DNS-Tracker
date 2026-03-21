@@ -14,8 +14,8 @@ export default function Footer() {
           <Link href="#templates" className="hover:text-gray-900 dark:hover:text-white transition-colors">Templates</Link>
           <Link href="#propagation" className="hover:text-gray-900 dark:hover:text-white transition-colors">Propagation</Link>
           <Link href="#learn" className="hover:text-gray-900 dark:hover:text-white transition-colors">Learn DNS</Link>
-          <Link href="#" className="hover:text-gray-900 dark:hover:text-white transition-colors">Privacy</Link>
-          <Link href="#" className="hover:text-gray-900 dark:hover:text-white transition-colors">GitHub</Link>
+          <Link href="/privacy" className="hover:text-gray-900 dark:hover:text-white transition-colors">Privacy</Link>
+          <Link href="https://github.com/HemanthKumar52/Smart-DNS-Tracker" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 dark:hover:text-white transition-colors">GitHub</Link>
         </div>
 
         <div className="text-sm text-gray-400 dark:text-gray-600">

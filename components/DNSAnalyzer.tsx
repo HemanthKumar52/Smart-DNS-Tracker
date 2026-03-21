@@ -48,6 +48,7 @@ export default function DNSAnalyzer() {
   const [showHistory, setShowHistory] = useState(false);
   const [validationError, setValidationError] = useState("");
   const [copied, setCopied] = useState(false);
+  const [shared, setShared] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -292,9 +293,32 @@ export default function DNSAnalyzer() {
                   {copied ? <Check className="w-4 h-4 text-green-400" /> : <Clipboard className="w-4 h-4" />}
                   {copied ? "Copied!" : "Copy Report"}
                 </button>
-                <button className="flex items-center gap-2 px-4 py-2 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 rounded-lg text-sm text-gray-700 dark:text-white transition-colors border border-black/5 dark:border-white/5 backdrop-blur-sm">
-                  <Share2 className="w-4 h-4" />
-                  Share
+                <button
+                  onClick={() => {
+                    if (!report) return;
+                    const lines = [
+                      `DNS Analysis Report — ${report.domain}`,
+                      `Score: ${report.score}/100`,
+                      `Date: ${new Date(report.timestamp).toLocaleString()}`,
+                      "",
+                      ...report.records.map(
+                        (r) => `[${r.status.toUpperCase()}] ${r.type} Record — ${r.message}\n  ${r.explanation}${r.records.length ? "\n  Values: " + r.records.join(", ") : ""}`
+                      ),
+                      "",
+                      `Analyzed with Smart DNS Tracker`,
+                    ];
+                    if (navigator.share) {
+                      navigator.share({ title: `DNS Report: ${report.domain}`, text: lines.join("\n") }).catch(() => {});
+                    } else {
+                      navigator.clipboard.writeText(lines.join("\n"));
+                      setShared(true);
+                      setTimeout(() => setShared(false), 2000);
+                    }
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 rounded-lg text-sm text-gray-700 dark:text-white transition-colors border border-black/5 dark:border-white/5 backdrop-blur-sm"
+                >
+                  {shared ? <Check className="w-4 h-4 text-green-400" /> : <Share2 className="w-4 h-4" />}
+                  {shared ? "Copied!" : "Share"}
                 </button>
               </div>
             </div>
@@ -358,9 +382,79 @@ function HealthScore({ score }: { score: number }) {
   );
 }
 
+function getSuggestedFix(record: DNSResult): { title: string; steps: string[]; example: string } {
+  switch (record.type) {
+    case "MX":
+      return {
+        title: "Add MX Records",
+        steps: [
+          "Log in to your DNS provider (e.g., Cloudflare, GoDaddy, Namecheap).",
+          "Navigate to DNS management for your domain.",
+          "Add an MX record pointing to your email provider.",
+          "Set the priority (lower = higher priority).",
+          "Save and wait for propagation (up to 48 hours).",
+        ],
+        example: "MX 10 mail.example.com\nMX 20 mail2.example.com",
+      };
+    case "TXT":
+      if (record.message.toLowerCase().includes("spf")) {
+        return {
+          title: record.message.includes("Weak") ? "Strengthen Your SPF Record" : "Add an SPF Record",
+          steps: record.message.includes("Weak")
+            ? [
+                "Your current SPF record uses +all or ?all which allows anyone to send as you.",
+                "Replace +all or ?all with ~all (softfail) or -all (hardfail).",
+                "Update the TXT record in your DNS provider.",
+              ]
+            : [
+                "Log in to your DNS provider.",
+                "Add a TXT record for your root domain (@).",
+                "Set the value to your SPF policy authorizing your email senders.",
+                "Use ~all (softfail) or -all (hardfail) at the end.",
+              ],
+          example: record.message.includes("Weak")
+            ? 'v=spf1 include:_spf.google.com ~all'
+            : 'v=spf1 include:_spf.google.com ~all',
+        };
+      }
+      if (record.message.toLowerCase().includes("dmarc")) {
+        return {
+          title: "Add a DMARC Record",
+          steps: [
+            "Log in to your DNS provider.",
+            "Add a TXT record for _dmarc.yourdomain.com.",
+            "Start with a monitoring policy (p=none) to collect reports.",
+            "Gradually move to p=quarantine then p=reject as you verify legitimate senders.",
+          ],
+          example: 'v=DMARC1; p=none; rua=mailto:dmarc-reports@yourdomain.com',
+        };
+      }
+      return {
+        title: "Add Missing TXT Record",
+        steps: [
+          "Log in to your DNS provider.",
+          "Add a TXT record with the required value.",
+          "Save and wait for propagation.",
+        ],
+        example: '"v=spf1 include:your-provider.com ~all"',
+      };
+    default:
+      return {
+        title: `Fix ${record.type} Record`,
+        steps: [
+          "Log in to your DNS provider.",
+          `Add or update the ${record.type} record for your domain.`,
+          "Save changes and allow time for DNS propagation.",
+        ],
+        example: `${record.type} record value depends on your provider.`,
+      };
+  }
+}
+
 function ResultCard({ record, delay }: { record: DNSResult; delay: number }) {
   const [expanded, setExpanded] = useState(false);
   const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
+  const [showFix, setShowFix] = useState(false);
 
   const icons = {
     valid: <CheckCircle className="w-5 h-5 text-green-500" />,
@@ -438,10 +532,42 @@ function ResultCard({ record, delay }: { record: DNSResult; delay: number }) {
                 <div className="bg-red-500/10 p-2 rounded text-xs text-red-600 dark:text-red-300">No records found.</div>
               )}
 
-              {record.status === "error" && (
-                <button className="w-full py-2 bg-blue-500/10 text-blue-600 dark:text-blue-400 text-sm font-medium rounded hover:bg-blue-500/20 transition-colors">
-                  Get Suggested Fix
-                </button>
+              {(record.status === "error" || record.status === "warning") && (
+                <>
+                  <button
+                    onClick={() => setShowFix(!showFix)}
+                    className="w-full py-2 bg-blue-500/10 text-blue-600 dark:text-blue-400 text-sm font-medium rounded hover:bg-blue-500/20 transition-colors"
+                  >
+                    {showFix ? "Hide Fix" : "Get Suggested Fix"}
+                  </button>
+                  <AnimatePresence>
+                    {showFix && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="mt-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-500/20 rounded-lg space-y-3">
+                          <h5 className="font-semibold text-blue-700 dark:text-blue-300 text-sm">
+                            {getSuggestedFix(record).title}
+                          </h5>
+                          <ol className="list-decimal list-inside space-y-1">
+                            {getSuggestedFix(record).steps.map((step, i) => (
+                              <li key={i} className="text-xs text-gray-600 dark:text-gray-300">{step}</li>
+                            ))}
+                          </ol>
+                          <div>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mb-1 font-medium">Example record:</p>
+                            <div className="bg-gray-100 dark:bg-black/30 p-2 rounded font-mono text-xs text-blue-600 dark:text-blue-300 break-all whitespace-pre-wrap">
+                              {getSuggestedFix(record).example}
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </>
               )}
             </div>
           </motion.div>
